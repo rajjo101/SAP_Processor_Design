@@ -1,0 +1,59 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/rajjo/OneDrive/Desktop/sap/simulation/modelsim/rtl_work
+vbooth_accelerator
+!s110 1781872830
+!i10b 1
+!s100 TGZJl:UU2jf:HEYUfn5BD1
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I;c`oZz249HbO`G[kib<9M1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1781762415
+8C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v
+FC:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v
+!i122 2
+L0 1 39
+Z3 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1781872830.000000
+!s107 C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/rajjo/OneDrive/Desktop/sap|C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v|
+!i113 1
+Z4 o-vlog01compat -work work
+Z5 !s92 -vlog01compat -work work +incdir+C:/Users/rajjo/OneDrive/Desktop/sap
+Z6 tCvgOpt 0
+vtb_booth
+!s110 1781872834
+!i10b 1
+!s100 1WEbJ9IhCKh?<iHjhoEk90
+R1
+IF<@IX?h<V7ECzR?TY_E7>0
+R2
+R0
+w1781724364
+8C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v
+FC:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v
+!i122 3
+L0 2 45
+R3
+r1
+!s85 0
+31
+!s108 1781872833.000000
+!s107 C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/rajjo/OneDrive/Desktop/sap|C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v|
+!i113 1
+R4
+R5
+R6

@@ -1,0 +1,132 @@
+module processor;
+reg clk;
+reg rst;
+wire [11:0] cntl;
+
+// Instruction register outputs
+wire [3:0] op;
+wire [3:0] address;
+
+// Register outputs
+wire [7:0] A;
+wire [7:0] B;
+wire [7:0] out;
+
+// Memory interface
+wire [7:0] mem_data;
+wire [3:0] mar_addr;
+wire [3:0] pc_addr;
+wire [7:0] out_data;
+// Control signals
+wire halt;
+
+//=====================
+// Program Counter
+//=====================
+
+pc PC(
+    .clk(clk),
+    .rst(rst),
+    .cp(cntl[11]),     // CP
+    .pc_out(pc_addr)
+);
+
+//=====================
+// MAR
+//=====================
+
+mar MAR(
+    .clk(clk),
+    .rst(rst),
+    .ld(cntl[9]),    // LM
+    .bus(
+        cntl[10] ? pc_addr : address
+    ),
+    .mar_out(mar_addr)
+);
+
+//=====================
+// RAM
+//=====================
+
+mem16k RAM(
+    .addr(mar_addr),
+    .data(mem_data)
+);
+
+//=====================
+// Instruction Register
+//=====================
+
+ir IR(
+    .clk(clk),
+    .rst(rst),
+    .loadIR(cntl[7]),   // LI
+    .data_in(mem_data),
+    .op(op),
+    .addr(address)
+);
+
+//=====================
+// Control Unit
+//=====================
+
+cu CU(
+    .clk(clk),
+    .rst(rst),
+    .op(op),
+    .cntl(cntl),
+    .halt(halt)
+);
+
+//=====================
+// B Register
+//=====================
+
+register BREG(
+    .clk(clk),
+    .rst(rst),
+    .loadB(cntl[1]),    // LB
+    .data_in(mem_data),
+    .B(B)
+);
+
+//=====================
+// ALU
+//=====================
+
+addersubtractor ALU(
+    .A(A),
+    .B(B),
+    .op(op),
+    .out(out),
+	.EU(cntl[2])
+);
+
+//=====================
+// Accumulator
+//=====================
+
+accumulator ACC(
+    .clk(clk),
+    .rst(rst),
+    .loadA(cntl[5]),     // LA
+    .data_in(
+        cntl[2] ? out : mem_data
+    ),
+    .A(A)
+);
+
+//=====================
+// Output Register
+//=====================
+//
+output_register OUTREG(
+    .clk(clk),
+    .rst(rst),
+    .LO(cntl[0]),   // LO
+    .A(A),
+    .out_data(out_data)
+);
+
+endmodule

@@ -1,0 +1,85 @@
+# Reading pref.tcl
+# ERROR: No extended dataflow license exists
+# do sap_processor_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/rajjo/OneDrive/Desktop/sap {C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:09:03 on Jun 19,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/rajjo/OneDrive/Desktop/sap" C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v 
+# -- Compiling module booth_accelerator
+# 
+# Top level modules:
+# 	booth_accelerator
+# End time: 18:09:03 on Jun 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/rajjo/OneDrive/Desktop/sap {C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:09:03 on Jun 19,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/rajjo/OneDrive/Desktop/sap" C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v 
+# -- Compiling module tb_booth
+# 
+# Top level modules:
+# 	tb_booth
+# End time: 18:09:03 on Jun 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  tb_booth.v
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" tb_booth.v 
+# Start time: 18:09:04 on Jun 19,2026
+# ** Error (suppressible): (vsim-19) Failed to access library 'tb_booth' at "tb_booth".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./sap_processor_run_msim_rtl_verilog.do PAUSED at line 12
+vlog -vlog01compat -work work +incdir+C:/Users/rajjo/OneDrive/Desktop/sap C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:10:30 on Jun 19,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/rajjo/OneDrive/Desktop/sap" C:/Users/rajjo/OneDrive/Desktop/sap/booth_accelerator.v 
+# -- Compiling module booth_accelerator
+# 
+# Top level modules:
+# 	booth_accelerator
+# End time: 18:10:30 on Jun 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -vlog01compat -work work +incdir+C:/Users/rajjo/OneDrive/Desktop/sap C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:10:33 on Jun 19,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/rajjo/OneDrive/Desktop/sap" C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v 
+# -- Compiling module tb_booth
+# 
+# Top level modules:
+# 	tb_booth
+# End time: 18:10:34 on Jun 19,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim rtl_work.tb_booth
+# vsim rtl_work.tb_booth 
+# Start time: 18:09:04 on Jun 19,2026
+# Loading work.tb_booth
+# Loading work.booth_accelerator
+add wave -r /*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: rajjo  Hostname: RAJJO_199SDELL  ProcessID: 5852
+#           Attempting to use alternate WLF file "./wlft18eqdx".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft18eqdx
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run -all
+# T=0 a= 4 b= 5 result=  0
+# T=60000 a= 4 b= 5 result= 20
+# ** Note: $stop    : C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v(43)
+#    Time: 80 ns  Iteration: 0  Instance: /tb_booth
+# Break in Module tb_booth at C:/Users/rajjo/OneDrive/Desktop/sap/tb_booth.v line 43
+# End time: 18:18:11 on Jun 19,2026, Elapsed time: 0:09:07
+# Errors: 0, Warnings: 0

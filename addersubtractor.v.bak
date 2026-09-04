@@ -1,0 +1,16 @@
+module addersubtractor(
+	input [7:0]A,
+	input [7:0]B,
+	input op,
+	output [7:0]out,
+	output carry
+);
+wire [8:0] temp;
+wire [7:0]B_comp;
+assign B_comp = (op == 4'b0010) ? (~B + 8'b00000001) : B;
+
+assign temp = A + B_comp;
+
+assign out = temp[7:0];
+assign carry  = temp[8];
+endmodule

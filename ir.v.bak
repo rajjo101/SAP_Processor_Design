@@ -1,0 +1,6 @@
+module ir(
+	input [3:0]op,
+	input [3:0]adds,
+	output reg result
+);
+endmodule

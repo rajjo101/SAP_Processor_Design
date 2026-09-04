@@ -1,0 +1,5 @@
+module cu (
+	input 
+	output [11:0] cntl;
+);
+endmodule

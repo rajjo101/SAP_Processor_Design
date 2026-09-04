@@ -1,0 +1,45 @@
+module booth_accelerator(
+	input clk,
+	input rst,
+	input [3:0]a,
+	input [3:0]b,
+	output reg [7:0]result
+);
+
+reg [3:0]acc = 4'b0000;
+reg Q = 0;
+reg count = 3'd0;
+reg [3:0]Qn;
+
+always @(posedge clk, posedge rst) begin
+	if(rst) begin
+		result <= 8'd0;
+		Qn <= a;
+	end
+	else if(count == 3'd4) begin
+		result <= {acc,a};
+	end
+	else begin
+	case({Qn[0],Q})
+	01 : begin
+			acc <= acc + b;
+			acc <= acc >> 1;
+			Q <= Qn[0];
+			Qn <= Qn >> 1;
+		end
+	10 : begin
+			acc <= acc + (~b + 4'd1);
+			acc <= (acc >> 1);
+			Q <= Qn[0];
+			Qn <= Qn >> 1;
+		end
+	endcase
+	acc <= acc >> 1;
+	Q <= Qn[0];
+	Qn <= Qn >> 1;
+	count <= count + 1;
+	end
+	
+end
+
+endmodule

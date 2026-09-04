@@ -1,0 +1,158 @@
+`timescale 1ns/1ps
+
+module test_sap;
+reg clk;
+reg rst;
+wire halt;
+wire [3:0]op;
+wire [7:0]cntl;
+wire [7:0]A;
+wire [7:0] B;
+wire [7:0] out;
+wire [3:0] address;
+
+// Memory interface
+wire [7:0] mem_data;
+wire [3:0] mar_addr;
+wire [3:0] pc_addr;
+wire [7:0] out_data;
+// Control signals
+
+pc PC(
+    .clk(clk),
+    .rst(rst),
+    .cp(cntl[11]),     // CP
+    .pc_out(pc_addr)
+);
+
+//=====================
+// MAR
+//=====================
+
+mar MAR(
+    .clk(clk),
+    .rst(rst),
+    .ld(cntl[9]),    // LM
+    .bus(
+        cntl[10] ? pc_addr : address
+    ),
+    .mar_out(mar_addr)
+);
+
+//=====================
+// RAM
+//=====================
+
+mem16k RAM(
+    .addr(mar_addr),
+    .data(mem_data)
+);
+
+//=====================
+// Instruction Register
+//=====================
+
+ir IR(
+    .clk(clk),
+    .rst(rst),
+    .loadIR(cntl[7]),   // LI
+    .data_in(mem_data),
+    .op(op),
+    .addr(address)
+);
+
+//=====================
+// Control Unit
+//=====================
+
+cu CU(
+    .clk(clk),
+    .rst(rst),
+    .op(op),
+    .cntl(cntl),
+    .halt(halt)
+);
+
+//=====================
+// B Register
+//=====================
+
+register BREG(
+    .clk(clk),
+    .rst(rst),
+    .loadB(cntl[1]),    // LB
+    .data_in(mem_data),
+    .B(B)
+);
+
+//=====================
+// ALU
+//=====================
+
+addersubtractor ALU(
+    .A(A),
+    .B(B),
+    .op(op),
+    .out(out),
+	.EU(cntl[2])
+);
+
+//=====================
+// Accumulator
+//=====================
+
+accumulator ACC(
+    .clk(clk),
+    .rst(rst),
+    .loadA(cntl[5]),     // LA
+    .data_in(
+        cntl[2] ? out : mem_data
+    ),
+    .A(A)
+);
+
+//=====================
+// Output Register
+//=====================
+//
+output_register OUTREG(
+    .clk(clk),
+    .rst(rst),
+    .LO(cntl[0]),   // LO
+    .A(A),
+    .out_data(out_data)
+);
+
+
+always #5 clk = ~clk;
+// monitor
+initial begin
+    $monitor(
+    "T=%0t OP=%b CNTL=%b A=%d B=%d OUT=%d HALT=%b",
+    $time,
+    op,
+    cntl,
+    A,
+    B,
+    out,
+    halt
+    );
+end
+
+
+initial begin
+
+    clk = 1;
+    rst = 1;
+
+    #20;
+    rst = 0;
+
+    wait(halt);
+
+    #20;
+    $stop;
+
+end
+
+endmodule

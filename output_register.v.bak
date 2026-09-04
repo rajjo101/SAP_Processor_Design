@@ -1,0 +1,8 @@
+module output_register(
+	input [7:0]A,
+	input LO,
+	output [7:0]out_reg
+);
+assign out_reg = LO ? A : 8'd0;
+
+endmodule

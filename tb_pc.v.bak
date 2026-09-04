@@ -1,0 +1,40 @@
+`timescale 1ns/1ps
+module tb_pc;
+reg clk;
+reg rst;
+wire [3:0] pc;
+
+// Instantiate the counter
+pc uut (
+    .clk(clk),
+    .rst(rst),
+    .pc(pc)
+);
+
+// Clock generation
+always #5 clk = ~clk;
+
+initial
+begin
+    // Initialize signals
+    clk = 0;
+    rst = 1;
+
+    // Hold reset for some time
+    #10;
+    rst = 0;
+
+    // Run simulation for some time
+    #200;
+
+    $stop;
+end
+
+// Monitor output
+initial
+begin
+    $monitor("Time = %0t | Reset = %b | Counter = %b",
+              $time, rst, pc);
+end
+
+endmodule
